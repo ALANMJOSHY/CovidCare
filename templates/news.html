@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>News</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- bootstrap css -->
+      <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+      <!-- style css -->
+      <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+      <!-- fevicon -->
+      <link rel="icon" href="{% static 'images/fevicon.png" type="image/gif' %}" />
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+      <!-- Tweaks for older IEs-->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <!-- owl stylesheets --> 
+      <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+      <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+   </head>
+   <body>
+      <!--header section start -->
+      <div class="header_section header_bg">
+         <div class="container-fluid">
+               <div class="main">
+                  <div class="logo"><a href="/covid_info" class="text-white" style="font-size:20px;"><b>COVID♰CARE</b></a></div>
+                  <div class="menu_text">
+                     <ul>
+                        <div class="togle_">
+                           <div class="menu_main">
+                              <ul>
+                                 <li><a href="/">Back</a></li>
+
+                              </ul>
+
+                           </div>
+                        </div>
+                        <div id="myNav" class="overlay">
+                          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                           <div class="overlay-content">
+                               <a href="/covid_info">Home</a>
+                              <a href="/protect">Protect</a>
+                              <a href="/about">About</a>
+                              <a href="/doctors">Doctors</a>
+                              <a href="/news">News</a>
+                           </div>
+                        </div>
+                        <span class="navbar-toggler-icon"></span>
+                        <span onclick="openNav()"><img src="{% static 'images/toogle-icon.png' %}" class="toggle_menu"></span>
+                        <span onclick="openNav()"><img src="{% static 'images/toogle-icon1.png' %}" class="toggle_menu_1"></span>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <!-- banner section start -->
+            <div class="container">
+               <div class="about_taital_main">
+                  <h2 class="about_tag">News About Corona Virus</h2>
+                  <div class="about_menu">
+
+                  </div>
+               </div>
+            </div>
+         <!-- banner section end -->
+      </div>
+      <!-- header section end -->
+      <!-- news section start -->
+      <div class="news_section layout_padding">
+         <div class="container">
+            <div id="main_slider" class="carousel slide" data-ride="carousel">
+               <div class="carousel-inner">
+                  <div class="carousel-item active">
+                     <h1 class="news_taital">Latest News</h1>
+                     <p class="news_text">India's fight against COVID-19 shows signs of progress with a decline in daily cases. This is a positive development, suggesting the current wave might be receding. However, health officials remain cautious. The detection of a new variant, JN.1, serves as a reminder that the virus continues to evolve. Experts warn that the virus might become endemic, meaning it could circulate at a lower level but cause occasional outbreaks in the future. Given this, staying informed about JN.1 and COVID-19 developments through reliable sources and following public health guidelines, especially for vulnerable individuals, remains crucial.</p>
+                     <div class="news_section_2 layout_padding">
+                        <div class="box_main">
+                           <div class="image_1"><img src="{% static 'images/news-img.png' %}"></div>
+                           <h2 class="design_text">COVID-19 Cases Decline in India, But New Variant Raises Concerns</h2>
+                           <p class="lorem_text">India's COVID-19 situation is a double-edged sword. There's a much-needed decline in daily cases, suggesting the current wave might be receding and offering some relief. This could be due to increased vaccination rates, prior infections providing some immunity, or public health measures. However, a new variant, JN.1, throws a wrench in the works. With its unknown impact on transmissibility, immune escape, and severity, JN.1 necessitates continued caution.  Learning from past surges caused by new variants, health officials urge vigilance. Staying informed about JN.1 and COVID-19 in general, along with maintaining public health measures like masking and social distancing, especially for vulnerable individuals, remains crucial. Most importantly, getting vaccinated and boosted is the best defense against severe illness, hospitalization, and death from COVID-19, regardless of the variant. By following these steps, we can navigate this complex situation and mitigate the impact of COVID-19.</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="carousel-item">
+                    <h1 class="news_taital">Latest News</h1>
+                     <p class="news_text">The UN health agency chief warns that COVID-19 "is still circulating, changing, and killing." This underscores the importance of global cooperation in managing the pandemic.</p>
+                     <div class="news_section_2 layout_padding">
+                        <div class="box_main">
+                           <div class="image_1"><img src="{% static 'images/news-img.png' %}"></div>
+                           <h2 class="design_text">US Ends Title 42: Potential Impact on COVID-19 Spread at Border</h2>
+                           <p class="lorem_text">The recent ending of Title 42 in the US, a policy that allowed for the rapid expulsion of migrants at the southern border due to COVID-19 concerns, has sparked discussions about its potential impact on the spread of the virus. The main concern is that an increase in migrants entering the US could lead to a rise in COVID-19 cases, especially if these individuals haven't been vaccinated or tested. However, it's important to note that many migrants may already have some level of immunity due to prior infections. Additionally, the US is implementing new measures to manage the influx of migrants, including requiring them to apply for asylum online and potentially offering them vaccinations and testing upon arrival. The overall impact of Title 42's end on COVID-19 spread at the border remains uncertain, and it will depend on various factors like vaccination rates among migrants, the effectiveness of new border management strategies, and the overall COVID-19 situation in the region.</p>
+
+                        </div>
+                     </div>
+                  </div>
+                  <div class="carousel-item">
+                    <h1 class="news_taital">Latest News</h1>
+                     <p class="news_text">The UN health agency chief warns that COVID-19 "is still circulating, changing, and killing." This underscores the importance of global cooperation in managing the pandemic.</p>
+                     <div class="news_section_2 layout_padding">
+                        <div class="box_main">
+                           <div class="image_1"><img src="{% static 'images/news-img.png' %}"></div>
+                           <h2 class="design_text">Living with COVID: Experts Discuss Vaccination Strategies for an Endemic Future</h2>
+                           <p class="lorem_text">As COVID-19 shows signs of potentially becoming endemic, settling into a pattern of constant circulation with occasional outbreaks, experts are pondering how vaccination strategies will need to adapt.  Currently, most people receive a two-dose primary series followed by boosters, but the frequency of these boosters might need to be adjusted to maintain adequate protection. Additionally, high-risk groups like the elderly or immunocompromised might need to be prioritized to ensure they receive the most effective vaccines and boosters available.  Finally, with the virus's ability to mutate, updated vaccines might be needed if new variants emerge that significantly evade existing ones.  Overall, vaccination strategies will likely need to become more flexible and adaptable to address the challenges of a constantly circulating COVID-19.</p>
+
+
+                        </div>
+                     </div>      
+                  </div>
+               </div>
+               <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
+               <i class="fa fa-angle-left"></i>
+               </a>
+               <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
+               <i class="fa fa-angle-right"></i>
+               </a>
+            </div>
+            </div>
+         </div>
+      </div>
+      <!-- news section end -->
+      <!-- footer section start -->
+      <div class="footer_section layout_padding">
+         <div class="container">
+            <div class="footer_section_2">
+               <div class="row">
+
+                  <div class="col-lg-4 col-sm-6">
+                     <h2 class="useful_text">About</h2>
+                     <p class="footer_text">Explore our website for up-to-date COVID-19 information, including infection rates and mortality statistics, empowering you to stay informed and make informed decisions</p>
+                  </div>
+                  <div class="col-lg-4 col-sm-6">
+                     <h2 class="useful_text">Contact Us</h2>
+                     <div class="location_text">
+                        <ul>
+                           <li>
+                              <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>
+                              <span class="padding_15">Location</span></a>
+                           </li>
+                           <li>
+                              <a href="#"><i class="fa fa-phone" aria-hidden="true"></i>
+                              <span class="padding_15">Call +91 6282025882</span></a>
+                           </li>
+                           <li>
+                              <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>
+                              <span class="padding_15">covidcare@gmail.com</span></a>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-sm-6">
+                     <h2 class="useful_text">countrys</h2>
+                     <div class="map_image"><img src="{% static 'images/map-bg.png' %}"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- footer section end -->
+      <!-- copyright section start -->
+      <div class="copyright_section">
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-12">
+
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- copyright section end -->
+      <!-- Javascript files-->
+      <script src="{% static 'js/jquery.min.js' %}"></script>
+      <script src="{% static 'js/popper.min.js' %}"></script>
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
+      <script src="{% static 'js/plugin.js' %}"></script>
+      <!-- sidebar -->
+      <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+      <script src="{% static 'js/custom.js' %}"></script>
+      <!-- javascript --> 
+      <script src="{% static 'js/owl.carousel.js' %}"></script>
+      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+      <script>
+         $(document).ready(function(){
+         $(".fancybox").fancybox({
+         openEffect: "none",
+         closeEffect: "none"
+         });
+              
+         $(".zoom").hover(function(){
+              
+         $(this).addClass('transition');
+         }, function(){
+              
+         $(this).removeClass('transition');
+         });
+         });
+      </script> 
+      <script>
+         function openNav() {
+         document.getElementById("myNav").style.width = "100%";
+         }
+         function closeNav() {
+         document.getElementById("myNav").style.width = "0%";
+         }
+      </script>  
+   </body>
+</html>

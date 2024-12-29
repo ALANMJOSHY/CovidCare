@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+ {%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        /* Add your custom styles here */
+        @import url(https://fonts.googleapis.com/css?family=Poppins:300);
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; /* Prevent scrolling */
+        }
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1000;
+            object-fit: contain; /* Ensure the entire video is visible without zooming */
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: #ffffff;
+            font-size: 24px;
+            padding: 20px;
+        }
+
+        .login-page {
+            width: 400px;
+            padding: 8% 0 0;
+            margin: auto;
+        }
+
+        .form {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.5); /* Set background color with transparency */
+            max-width: 400px;
+            margin: 0 auto 100px;
+            padding: 45px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        }
+
+        .form input, .form .custom-dropdown input {
+    font-family: "Poppins", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: calc(100% - 30px); /* Adjusted width */
+    border: 0;
+    border-radius: 7px;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    padding-right: 40px; /* Adjusted for the dropdown icon */
+}
+
+
+        .form .custom-dropdown {
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .form button {
+            font-family: "Poppins", sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background: #234666;
+            width: 100%;
+            border: 0;
+            padding: 15px;
+            color: #FFFFFF;
+            border-radius: 7px;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: pointer;
+        }
+
+        .form button:hover, .form button:active, .form button:focus {
+            background: #0e2941;
+        }
+
+        .form .message {
+            margin: 15px 0 0;
+            color: #b3b3b3;
+            font-size: 12px;
+        }
+
+        .form .message a {
+            color: #234666;
+            text-decoration: none;
+        }
+
+        .form .register-form {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+<video autoplay loop muted id="video-background">
+        <source src="{% static 'D:\main project\project\covid\static\doc_login.mp4' %}" type="video/mp4">
+  </video>
+<div class="login-page">
+    <div class="form">
+        <!-- Registration form -->
+        <form class="register-form" method="post" action="/save_doctor/">{% csrf_token %}
+            <h2><i class="fas fa-user-md"></i> Doctor Registration</h2>
+            <input type="text" placeholder="Name" required name="Name"/>
+            <input type="email" placeholder="Email" required name="Email"/> <!-- Added email field -->
+            <input type="text" placeholder="Username" required name="Username"/>
+            <input type="password" placeholder="Password" required name="Password"/>
+
+            <!-- Custom dropdown for Select Department -->
+            <div class="custom-dropdown">
+                <input type="text" id="departmentInput" placeholder="Select Department" required readonly name="Department">
+                <div class="dropdown-content" id="departmentDropdown">
+                    <a href="#">Cardiology</a>
+                    <a href="#">Dermatology</a>
+                    <a href="#">Endocrinology</a>
+                    <a href="#">Gastroenterology</a>
+                    <a href="#">Neurology</a>
+                    <a href="#">Oncology</a>
+                </div>
+            </div>
+
+            <button type="submit" name="register">Register</button>
+            <p class="message">Already registered? <a href="#" class="toggle-form">Login</a></p>
+        </form>
+
+        <!-- Login form -->
+        <form class="login-form" method="post" action="/doctor_check_login/">{% csrf_token %}
+            <h2><i class="fas fa-lock"></i> Doctor Login</h2>
+            <input type="text" placeholder="Username" required name="username"/>
+            <input type="password" placeholder="Password" required name="password"/>
+            <button type="submit" name="login">Login</button>
+            <p class="message">Not registered? <a href="#" class="toggle-form">Create an account</a></p>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Toggle between login and registration forms
+    document.addEventListener('DOMContentLoaded', function () {
+        var toggleForms = document.querySelectorAll('.toggle-form');
+        toggleForms.forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                var registerForm = document.querySelector('.register-form');
+                var loginForm = document.querySelector('.login-form');
+
+                // Toggle display between 'block' and 'none' for registration and login forms
+                if (registerForm.style.display === 'none') {
+                    registerForm.style.display = 'block';
+                    loginForm.style.display = 'none';
+                } else {
+                    registerForm.style.display = 'none';
+                    loginForm.style.display = 'block';
+                }
+            });
+        });
+
+        // Dropdown functionality
+        var departmentInput = document.getElementById('departmentInput');
+        var departmentDropdown = document.getElementById('departmentDropdown');
+
+        departmentInput.addEventListener('click', function () {
+            departmentDropdown.classList.toggle('show');
+        });
+
+        // Close the dropdown if the user clicks outside of it
+        window.addEventListener('click', function (event) {
+            if (!event.target.matches('#departmentInput')) {
+                var dropdowns = document.getElementsByClassName('dropdown-content');
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        });
+
+        // Set the selected value when an option is clicked
+        departmentDropdown.addEventListener('click', function (event) {
+            if (event.target.tagName === 'A') {
+                departmentInput.value = event.target.textContent;
+            }
+        });
+    });
+</script>
+</body>
+</html>

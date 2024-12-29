@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Covid Care</title>
+<style>
+
+  #background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+        }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .card {
+    max-width: 320px;
+    border-width: 1px;
+    border-color: rgba(219, 234, 254, 1);
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    grid-gap: 1rem;
+    gap: 1rem;
+  }
+
+  .icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background-color: rgba(96, 165, 250, 1);
+    padding: 0.5rem;
+    color: rgba(255, 255, 255, 1);
+  }
+
+  .icon svg {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  .alert {
+    font-weight: 600;
+    color: rgba(107, 114, 128, 1);
+  }
+
+  .message {
+    margin-top: 1rem;
+    color: rgba(107, 114, 128, 1);
+  }
+
+  .actions {
+    margin-top: 1.5rem;
+  }
+
+  .actions a {
+    text-decoration: none;
+  }
+
+  .read {
+    display: inline-block;
+    border-radius: 0.5rem;
+    width: 87%;
+    padding: 0.75rem 1.25rem;
+    text-align: center;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    background-color: rgba(59, 130, 246, 1);
+    color: rgba(255, 255, 255, 1);
+    transition: all 0.15s ease;
+  }
+
+  .read:hover {
+    background-color: rgb(230, 231, 233);
+  }
+</style>
+</head>
+<body>
+
+<video autoplay loop muted id="background-video">
+    <source src="{% static 'D:\main project\project\covid\static\tracklocation1.mp4' %}" type="video/mp4">
+</video>
+
+<div class="card">
+  <div class="header">
+    <span class="icon">
+      <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path clip-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" fill-rule="evenodd"></path>
+      </svg>
+    </span>
+    <p class="alert">New message!</p>
+  </div>
+
+  <p class="message">
+    {{ address }}<br>
+        {{ service_provider1 }}<br>
+        {{ number_location }}<br>
+  <p> Convert the Lattitude and Longitude</p>
+<a href="https://www.latlong.net/Show-Latitude-Longitude.html" target="_blank">Click here to convert</a>
+
+
+
+
+    <div class="actions">
+    <a class="read" href="/health_notification">
+      OK
+    </a>
+  </div>
+  </p>
+
+  </div>
+
+
+</body>
+</html>
+

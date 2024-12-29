@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+<style>
+
+#video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1000;
+    object-fit: contain; /* Ensure the entire video is visible without zooming */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    background-color: white; /* Pure white background color */
+    color: black; /* Black text color */
+}
+.formbold-mb-5 {
+    margin-bottom: 20px;
+}
+.formbold-pt-3 {
+    padding-top: 12px;
+}
+.formbold-main-wrapper {
+    overflow: hidden; /* Prevent scrolling */
+    position: relative; /* Add position relative */
+    z-index: 1; /* Ensure the form appears above the video background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+    flex-direction: column; /* Align items vertically */
+}
+.formbold-form-wrapper {
+    overflow: hidden; /* Prevent scrolling */
+    margin: 0 auto;
+    max-width: 550px;
+    width: 100%;
+    background: white; /* Pure white background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Black shadow effect */
+    margin-left: auto; /* Move the form to the right side */
+    margin-right: 70px; /* Add some margin on the right side */
+}
+.formbold-form-label {
+    display: block;
+    font-weight: 500;
+    font-size: 16px;
+    color: black; /* Black text color */
+    margin-bottom: 12px;
+    text-align: left; /* Align the label text to the left */
+}
+.formbold-form-label-2 {
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: black; /* Black text color */
+    text-align: left; /* Align the heading text to the left */
+}
+.formbold-form-input {
+    width: 100%;
+    padding: 12px 24px;
+    border-radius: 6px;
+    border: 1px solid black; /* Black border color */
+    background: white;
+    font-weight: 500;
+    font-size: 16px;
+    color: black; /* Black text color */
+    outline: none;
+    resize: none;
+}
+.formbold-form-input:focus {
+    border-color: black; /* Black border color on focus */
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+}
+.formbold-btn {
+    text-align: center;
+    font-size: 16px;
+    border-radius: 6px;
+    padding: 14px 32px;
+    border: none;
+    font-weight: 600;
+    background-color: rgba(255, 0, 0, 0.7); /* Red transparent background */
+    color: white;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.formbold-btn:hover {
+    background-color: rgba(255, 0, 0, 0.9); /* Darker red transparent background on hover */
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+}
+.formbold--mx-3 {
+    margin-left: -12px;
+    margin-right: -12px;
+}
+.formbold-px-3 {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+.flex {
+    display: flex;
+}
+.flex-wrap {
+    flex-wrap: wrap;
+}
+.w-full {
+    width: 100%;
+}
+@media (min-width: 540px) {
+    .sm\:w-half {
+        width: 50%;
+    }
+}
+.header {
+    width: 100%;
+    text-align: center;
+}
+.header h1 {
+    font-size: 24px; /* Adjust as needed */
+    color: black;
+    width: 100%;
+    text-align: center;
+    padding-left: 47%; /* Adjust as needed */
+}
+.header a {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+}
+.header img {
+    width: 100px; /* Adjust the width of the icon as needed */
+    height: auto;
+    margin-bottom: 10px;
+}
+</style>
+</head>
+<body>
+
+<video autoplay loop muted id="video-background">
+    <source src="{% static 'D:\main project\project\covid\static\doctor book.mp4' %}" type="video/mp4">
+</video>
+
+<div class="header">
+        <br>
+          <h1>Book an Appointment</a></h1>
+    </div>
+
+    <div class="formbold-main-wrapper">
+        <div class="formbold-form-wrapper">
+            <form action="/save_booking/" method="POST">{% csrf_token %}
+                <div class="formbold-mb-5">
+                    <label for="name" class="formbold-form-label"> Full Name </label>
+                    <input
+    type="text"
+    name="name"
+    id="name"
+    placeholder="Full Name"
+    class="formbold-form-input"
+    required
+/>
+
+                </div>
+                <div class="formbold-mb-5">
+                    <label for="phone" class="formbold-form-label"> Phone Number </label>
+                    <input
+    type="text"
+    name="phone"
+    id="phone"
+    placeholder="Enter your phone number"
+    class="formbold-form-input"
+    required
+/>
+
+                </div>
+                <div class="formbold-mb-5">
+                    <label for="email" class="formbold-form-label"> Email Address </label>
+                    <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        class="formbold-form-input"
+                        required
+                    />
+                </div>
+                <div class="formbold-mb-5">
+    <label for="doctor" class="formbold-form-label"> Doctor </label>
+    <select name="doctor" id="doctor" class="formbold-form-input">
+       {% for i in d1 %}
+        <option value="{{i.id}}">{{i.name}}</option>
+        {% endfor %}
+        <!-- Add more options for each doctor -->
+    </select>
+</div>
+
+                <div class="flex flex-wrap formbold--mx-3">
+                    <div class="w-full sm:w-half formbold-px-3">
+                        <div class="formbold-mb-5 w-full">
+                            <label for="date" class="formbold-form-label"> Date </label>
+                            <input
+                                type="date"
+                                name="date"
+                                id="date"
+                                class="formbold-form-input"
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div class="w-full sm:w-half formbold-px-3">
+                        <div class="formbold-mb-5">
+                            <label for="time" class="formbold-form-label"> Time </label>
+                            <input
+                                type="time"
+                                name="time"
+                                id="time"
+                                class="formbold-form-input"
+                                required
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="formbold-mb-5 formbold-pt-3">
+                    <label class="formbold-form-label formbold-form-label-2">
+                        Address Details
+                    </label>
+                    <div class="flex flex-wrap formbold--mx-3">
+                        <div class="w-full sm:w-half formbold-px-3">
+                            <div class="formbold-mb-5">
+                                <input
+                                    type="text"
+                                    name="area"
+                                    id="area"
+                                    placeholder="Enter area"
+                                    class="formbold-form-input"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div class="w-full sm:w-half formbold-px-3">
+                            <div class="formbold-mb-5">
+                                <input
+                                    type="text"
+                                    name="city"
+                                    id="city"
+                                    placeholder="Enter city"
+                                    class="formbold-form-input"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div class="w-full sm:w-half formbold-px-3">
+                            <div class="formbold-mb-5">
+                                <input
+                                    type="text"
+                                    name="state"
+                                    id="state"
+                                    placeholder="Enter state"
+                                    class="formbold-form-input"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div class="w-full sm:w-half formbold-px-3">
+                            <div class="formbold-mb-5">
+                                <input
+                                    type="text"
+                                    name="post-code"
+                                    id="post-code"
+                                    placeholder="Post Code"
+                                    class="formbold-form-input"
+                                    required
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                     {% if messages %}
+        <div class="notification">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+                    <button class="formbold-btn">Book Appointment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+<script>
+    window.onload = function() {
+        setTimeout(function() {
+            var notifications = document.querySelectorAll('.notification');
+            notifications.forEach(function(notification) {
+                notification.style.display = 'none';
+            });
+        }, 2000); // 2000 milliseconds = 2 seconds
+    };
+</script>
+
+</body>
+</html>

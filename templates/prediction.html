@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+{% load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Covid 19</title>
+    <style>
+   body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Prevent scrolling of entire page */
+}
+
+#video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1000;
+    object-fit: cover; /* Ensure the entire video covers the viewport */
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0); /* Transparent background color */
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1); /* Light shadow */
+    transition: box-shadow 0.3s ease; /* Smooth shadow transition */
+    overflow-y: auto; /* Allow vertical scrolling within the container */
+    max-height: calc(100% - 40px); /* Adjust max-height to fit within viewport */
+}
+
+.container:hover {
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2); /* Larger shadow on hover */
+}
+
+h1 {
+    color: #ffffff; /* Header text color */
+    text-align: center;
+}
+
+label {
+    font-weight: bold;
+    color: #ffffff; /* Label text color */
+}
+
+input, select {
+    width: calc(100% - 20px); /* Adjust input width */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #555555; /* Darker border color */
+    border-radius: 5px;
+    background-color: #404247; /* Darker input background color */
+    color: #ffffff; /* Input text color */
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+button {
+    width: auto; /* Adjust width of the buttons */
+    padding: 8px 16px; /* Adjust button padding */
+    margin-right: 10px; /* Adjust button margin */
+    background-color: #333333; /* Button background color */
+    color: #ffffff; /* Button text color */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Apply border radius */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+button:hover {
+    background-color: #555555; /* Darker background color on hover */
+}
+
+/* Hide scrollbar */
+.container::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar */
+}
+
+input:focus, select:focus {
+    border-color: #007bff; /* Focus border color */
+    background-color: #505358; /* Focus background color */
+    color: #ffffff; /* Focus text color */
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+    </style>
+</head>
+<body>
+<video autoplay loop muted id="video-background">
+        <source src="{% static 'D:\main project\project\covid\static\virus2.mp4' %}" type="video/mp4">
+  </video>
+    <div class="container">
+         <h1 >Medical Information</h1>
+        <form id="personForm" action="/check_prediction/" method="post">{% csrf_token %}
+            <!-- Age -->
+            <label for="age">Age:</label>
+            <input type="text" id="age" name="age" required>
+
+            <!-- Gender -->
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+                <option value="1">Male</option>
+                <option value="2">Female</option>
+                <option value="3">Other</option>
+            </select>
+
+            <!-- BMI -->
+            <label for="bmi">BMI:</label>
+            <input type="text" id="bmi" name="bmi" step="0.01" required>
+
+            <!-- Hypertensive -->
+            <label for="hypertensive">Hypertensive:</label>
+            <select id="hypertensive" name="hypertensive">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Atrial Fibrillation -->
+            <label for="atrialfibrillation">Atrial Fibrillation:</label>
+            <select id="atrialfibrillation" name="atrialfibrillation">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- CHD with no MI -->
+            <label for="chd">CHD with no MI:</label>
+            <select id="chd" name="chd">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Diabetes -->
+            <label for="diabetes">Diabetes:</label>
+            <select id="diabetes" name="diabetes">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Deficiency Anemias -->
+            <label for="deficiencyanemias">Deficiency Anemias:</label>
+            <select id="deficiencyanemias" name="deficiencyanemias">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Depression -->
+            <label for="depression">Depression:</label>
+            <select id="depression" name="depression">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Hyperlipemia -->
+            <label for="hyperlipemia">Hyperlipemia:</label>
+            <select id="hyperlipemia" name="hyperlipemia">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Renal Failure -->
+            <label for="renalfailure">Renal Failure:</label>
+            <select id="renalfailure" name="renalfailure">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- COPD -->
+            <label for="copd">COPD:</label>
+            <select id="copd" name="copd">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Heart Rate -->
+            <label for="heartrate">Heart Rate:</label>
+            <input type="text" id="heartrate" name="heartrate" required>
+
+            <!-- Systolic Blood Pressure -->
+            <label for="systolicbp">Systolic Blood Pressure:</label>
+            <input type="text" id="systolicbp" name="systolicbp" required>
+
+            <!-- Diastolic Blood Pressure -->
+            <label for="diastolicbp">Diastolic Blood Pressure:</label>
+            <input type="text" id="diastolicbp" name="diastolicbp" required>
+
+            <!-- Respiratory Rate -->
+            <label for="respiratoryrate">Respiratory Rate:</label>
+            <input type="text" id="respiratoryrate" name="respiratoryrate" required>
+
+            <!-- Temperature -->
+            <label for="temperature">Temperature:</label>
+            <input type="text" id="temperature" name="temperature" required>
+
+            <!-- SP O2 -->
+            <label for="spo2">SP O2:</label>
+            <input type="text" id="spo2" name="spo2" required>
+
+            <!-- Urine Output -->
+            <label for="urineoutput">Urine Output:</label>
+            <input type="text" id="urineoutput" name="urineoutput" required>
+
+            <!-- Hematocrit -->
+            <label for="hematocrit">Hematocrit:</label>
+            <input type="text" id="hematocrit" name="hematocrit" required>
+
+            <!-- RBC -->
+            <label for="rbc">RBC:</label>
+            <input type="text" id="rbc" name="rbc" required>
+
+            <!-- MCH -->
+            <label for="mch">MCH:</label>
+            <input type="text" id="mch" name="mch" required>
+
+            <!-- MCHC -->
+            <label for="mchc">MCHC:</label>
+            <input type="text" id="mchc" name="mchc" required>
+
+            <!-- MCV -->
+            <label for="mcv">MCV:</label>
+            <input type="text" id="mcv" name="mcv" required>
+
+            <!-- RDW -->
+            <label for="rdw">RDW:</label>
+            <input type="text" id="rdw" name="rdw" required>
+
+            <!-- Leucocyte -->
+            <label for="leucocyte">Leucocyte:</label>
+            <input type="text" id="leucocyte" name="leucocyte" required>
+
+            <!-- Platelets -->
+            <label for="platelets">Platelets:</label>
+            <input type="text" id="platelets" name="platelets" required>
+
+            <!-- Neutrophils -->
+            <label for="neutrophils">Neutrophils:</label>
+            <input type="text" id="neutrophils" name="neutrophils" required>
+
+            <!-- Basophils -->
+            <label for="basophils">Basophils:</label>
+            <input type="text" id="basophils" name="basophils" required>
+
+            <!-- Lymphocyte -->
+            <label for="lymphocyte">Lymphocyte:</label>
+            <input type="text" id="lymphocyte" name="lymphocyte" required>
+
+            <!-- PT -->
+            <label for="pt">PT:</label>
+            <input type="text" id="pt" name="pt" required>
+
+            <!-- INR -->
+            <label for="inr">INR:</label>
+            <input type="text" id="inr" name="inr" required>
+
+            <!-- NT-proBNP -->
+            <label for="ntproBNP">NT-proBNP:</label>
+            <input type="text" id="ntproBNP" name="ntproBNP" required>
+
+            <!-- Creatine Kinase -->
+            <label for="creatinekinase">Creatine Kinase:</label>
+            <input type="text" id="creatinekinase" name="creatinekinase" required>
+
+            <!-- Creatinine -->
+            <label for="creatinine">Creatinine:</label>
+            <input type="text" id="creatinine" name="creatinine" required>
+
+            <!-- Urea Nitrogen -->
+            <label for="ureanitrogen">Urea Nitrogen:</label>
+            <input type="text" id="ureanitrogen" name="ureanitrogen" required>
+
+            <!-- Glucose -->
+            <label for="glucose">Glucose:</label>
+            <input type="text" id="glucose" name="glucose" required>
+
+            <!-- Blood Potassium -->
+            <label for="bloodpotassium">Blood Potassium:</label>
+            <input type="text" id="bloodpotassium" name="bloodpotassium" required>
+
+            <!-- Blood Sodium -->
+            <label for="bloodsodium">Blood Sodium:</label>
+            <input type="text" id="bloodsodium" name="bloodsodium" required>
+
+            <!-- Blood Calcium -->
+            <label for="bloodcalcium">Blood Calcium:</label>
+            <input type="text" id="bloodcalcium" name="bloodcalcium" required>
+
+            <!-- Chloride -->
+            <label for="chloride">Chloride:</label>
+            <input type="text" id="chloride" name="chloride" required>
+
+            <!-- Anion Gap -->
+            <label for="aniongap">Anion Gap:</label>
+            <input type="text" id="aniongap" name="aniongap" required>
+
+            <!-- Magnesium Ion -->
+            <label for="magnesiumion">Magnesium Ion:</label>
+            <input type="text" id="magnesiumion" name="magnesiumion" required>
+
+            <!-- PH -->
+            <label for="ph">PH:</label>
+            <input type="text" id="ph" name="ph" required>
+
+            <!-- Bicarbonate -->
+            <label for="bicarbonate">Bicarbonate:</label>
+            <input type="text" id="bicarbonate" name="bicarbonate" required>
+
+            <!-- Lactic Acid -->
+            <label for="lacticacid">Lactic Acid:</label>
+            <input type="text" id="lacticacid" name="lacticacid" required>
+
+            <!-- PCO2 -->
+            <label for="pco2">PCO2:</label>
+            <input type="text" id="pco2" name="pco2" required>
+
+            <!-- EF -->
+            <label for="ef">EF:</label>
+            <input type="text" id="ef" name="ef" required>
+
+            <!-- Submit Button -->
+<button type="submit" style="background-color: #333333; color: #ffffff;">Predict</button>
+<!-- Reset Button -->
+<button type="reset" style="background-color: #333333; color: #ffffff;">Reset</button>
+<!-- Back Button -->
+<button type="button" onclick="history.back()" style="background-color: #333333; color: #ffffff;">Back</button>
+        </form>
+    </div>
+
+    <script>
+
+        function predict() {
+            // Retrieve the form data and perform prediction
+            const form = document.getElementById('personForm');
+            const formData = new FormData(form);
+
+            // Print or process the form data as needed
+            for (const entry of formData.entries()) {
+                console.log(entry[0], entry[1]);
+            }
+
+            // Replace the console.log with your prediction logic
+            alert("Prediction logic goes here!");
+
+        }
+    </script>
+</body>
+</html>

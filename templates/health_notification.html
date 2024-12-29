@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Appointments</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Ensure the video is behind other content */
+        }
+
+        .tab-pane {
+            position: relative; /* Ensure content overlays on top of the video */
+        }
+
+        .card-table {
+            background: rgba(255, 255, 255, 0.8); /* Example background for card */
+            /* Add any other styles you need for the card */
+        }
+
+    </style>
+
+</head>
+<body>
+<video autoplay loop muted id="video-background">
+        <source src="{% static 'D:\main project\project\covid\static\sick boy.mp4' %}" type="video/mp4">
+  </video>
+    <div class="tab-pane show active" id="upcoming-appointments">
+        <div class="card card-table mb-0">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-center mb-0">
+                        <thead>
+                            <tr>
+                                <th>Patient Name</th>
+                                <th>Result</th>
+                                <th>Location</th>
+                                 <!-- Add an empty column for the action buttons -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {%for i in d%}
+                            <tr>
+                                <td>
+                                    <h6 class="table-avatar">
+                                       {{i.user.Name}}
+                                    </h6>
+                                </td>
+                                <td>{{i.result}}</td>
+                                <td>{{i.user.Location}}</td>
+                                <td class="text-right">
+                                    <div class="table-action">
+                                        <a href="/search_hospital/{{i.user.Location}}" class="btn btn-sm bg-info-light">
+                                            <i class="far fa-eye"></i> View
+                                        </a>
+                                        <a href="/track_user/{{i.user.id}}" class="btn btn-sm bg-info-light">
+                                            <i class="far fa-eye"></i> track
+                                        </a>
+
+                                    </div>
+                                </td>
+                            </tr>
+
+                        {% endfor%}
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

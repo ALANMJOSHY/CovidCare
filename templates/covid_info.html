@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>Covid Care</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- bootstrap css -->
+      <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+      <!-- style css -->
+      <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+      <!-- fevicon -->
+      <link rel="icon" href="{% static 'images/fevicon.png' %}" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+      <!-- Tweaks for older IEs-->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <!-- owl stylesheets --> 
+      <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+      <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+   </head>
+   <body>
+      <!--header section start -->
+      <div class="header_section">
+         <div class="container-fluid">
+               <div class="main">
+                  <div class="logo"><a href="/covid_info" class="text-white" style="font-size:20px;"><b>COVID♰CARE</b></a></div>
+                  <div class="menu_text">
+                     <ul>
+                        <div class="togle_">
+                           <div class="menu_main">
+                              <ul>
+                                 <li><a href="/">Back</a></li>
+
+                              </ul>
+                           </div>
+                        </div>
+                        <div id="myNav" class="overlay">
+                           <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                           <div class="overlay-content">
+                              <a href="/covid_info">Home</a>
+                              <a href="/protect">Protect</a>
+                              <a href="/about">About</a>
+                              <a href="/doctors">Doctors</a>
+                              <a href="/news">News</a>
+                           </div>
+                        </div>
+                        <span class="navbar-toggler-icon"></span>
+                        <span onclick="openNav()"><img src="{% static 'images/toogle-icon.png' %}" class="toggle_menu"></span>
+                        <span onclick="openNav()"><img src="{% static 'images/toogle-icon1.png' %}" class="toggle_menu_1"></span>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+      <!-- banner section start -->
+      <div class="banner_section layout_padding">
+         <div class="container">
+            <div id="my_slider" class="carousel slide" data-ride="carousel">
+               <div class="carousel-inner">
+                  <div class="carousel-item active">
+                     <div class="row">
+                        <div class="col-md-6">
+                           <div class="container">
+                              <h1 class="banner_taital">Get Medical Care early</h1>
+                              <p class="banner_text">During the COVID-19 pandemic, it's crucial to seek medical care early if you experience symptoms or have been exposed to the virus. Early detection and treatment can help prevent the spread of the virus and ensure your well-being.</p>
+
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="banner_img"><img src="{% static 'images/banner-img.png' %}"></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="carousel-item">
+                     <div class="row">
+                        <div class="col-md-6">
+                           <div class="container">
+                              <h1 class="banner_taital"> Act Early, Stay Safe</h1>
+                              <p class="banner_text">Early detection and treatment can help reduce the spread of the virus and prevent severe complications. Follow public health guidelines, such as wearing masks, practicing social distancing, and washing your hands frequently, to protect yourself and others.</p>
+
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="banner_img"><img src="{% static 'images/banner-img.png' %}"></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="carousel-item">
+                     <div class="row">
+                        <div class="col-md-6">
+                           <div class="container">
+                              <h1 class="banner_taital">Get Medical Care early</h1>
+                              <p class="banner_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
+                              <div class="more_bt"><a href="#">Read More</a></div>
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="banner_img"><img src="{% static 'images/banner-img.png' %}"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+               <i class="fa fa-angle-left"></i>
+               </a>
+               <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+               <i class="fa fa-angle-right"></i>
+               </a>
+            </div>
+         </div>            
+      </div>
+      <!-- banner section end -->
+      </div>
+      <!-- header section end -->
+      <!-- protect section start -->
+      <div class="protect_section layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-12">
+                  <h1 class="protect_taital">How to Protect Yourself</h1>
+                  <p class="protect_text">Learn effective measures such as wearing masks, practicing good hand hygiene, and maintaining physical distance to safeguard against COVID-19.</p>
+               </div>
+            </div>
+            <div class="protect_section_2 layout_padding">
+               <div class="row">
+                  <div class="col-md-6">
+                     <h1 class="hands_text"><a href="#">Wash your <br>hands frequently</a></h1>
+                     <h1 class="hands_text_2"><a href="#">Maintain social <br>distancing</a></h1>
+                     <h1 class="hands_text"><a href="#">Avoid touching eyes,<br>nose and mouth</a></h1>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="image_2"><img src="{% static 'images/img-2.png' %}"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- protect section end -->
+      <!-- about section start -->
+      <div class="about_section layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-6">
+                  <div class="about_img"><img src="{% static 'images/img-1.png' %}"></div>
+               </div>
+               <div class="col-md-6">
+                  <h1 class="about_taital">Coronavirus what it is?</span></h1>
+                  <p class="about_text">The coronavirus, also known as COVID-19, is a highly contagious respiratory illness caused by the SARS-CoV-2 virus. It emerged in late 2019 and has since spread globally, leading to significant health, economic, and social impacts worldwide.</p>
+                  <div class="read_bt"><a href="/about">Read More</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- about section end -->
+      <!-- doctor section start -->
+      <div class="doctors_section layout_padding">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-sm-12">
+                  <div class="taital_main">
+                     <div class="taital_left">
+
+                     </div>
+                     <div class="taital_right">
+                        <h1 class="doctor_taital">What doctors say..</h1>
+                        <p class="doctor_text">Doctors advise the public to adhere to preventive measures such as wearing masks, practicing social distancing, maintaining good hand hygiene, avoiding large gatherings, and getting vaccinated to mitigate the spread of COVID-19 and protect both individuals and communities</p>
+                        <div class="readmore_bt"><a href="/doctors">Read More</a></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- doctor section end -->
+      <!-- news section start -->
+      <div class="news_section layout_padding">
+         <div class="container">
+            <div id="main_slider" class="carousel slide" data-ride="carousel">
+               <div class="carousel-inner">
+                  <div class="carousel-item active">
+                     <h1 class="news_taital">Latest News</h1>
+                     <p class="news_text">India's daily COVID cases are on a downward trend, but health officials are still urging caution. A new variant, JN.1, has been detected, and experts warn that periodic surges are likely as the virus becomes endemic. While the current situation appears positive, staying informed and following public health guidelines remains important.</p>
+                     <div class="news_section_2 layout_padding">
+                        <div class="box_main">
+                           <div class="image_1"><img src="{% static 'images/news-img.png' %}"></div>
+                           <h2 class="design_text">COVID-19 Cases Decline in India, But New Variant Raises Concerns</h2>
+                           <p class="lorem_text">While India is experiencing a welcome decline in daily COVID-19 cases, the emergence of a new variant, JN.1, is prompting health officials to urge continued vigilance.</p>
+                           <div class="read_btn"><a href="/news">Read More</a></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="carousel-item">
+                    <h1 class="news_taital">Latest News</h1>
+                     <p class="news_text">The lifting of Title 42 in the US raises concerns about a potential surge in COVID-19 cases at the border, but new border management strategies and migrant vaccination efforts aim to mitigate this risk.</p>
+                     <div class="news_section_2 layout_padding">
+                        <div class="box_main">
+                           <div class="image_1"><img src="{% static 'images/news-img.png' %}"></div>
+                           <h2 class="design_text"> US Ends Title 42: Potential Impact on COVID-19 Spread at Border</h2>
+                           <p class="lorem_text">A recent policy change in the US that might affect the spread of COVID-19 at the border.
+                              It implies potential challenges in managing the pandemic.</p>
+                           <div class="read_btn"><a href="/news">Read More</a></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="carousel-item">
+                    <h1 class="news_taital">Latest News</h1>
+                     <p class="news_text">As the possibility of COVID-19 becoming a constant presence looms, experts are grappling with how to adjust vaccination strategies for a future where the virus never fully disappears.</p>
+                     <div class="news_section_2 layout_padding">
+                        <div class="box_main">
+                           <div class="image_1"><img src="{% static 'images/news-img.png' %}"></div>
+                           <h2 class="design_text">Living with COVID: Experts Discuss Vaccination Strategies for an Endemic Future</h2>
+                           <p class="lorem_text">tackles the possibility of COVID-19 becoming endemic, a situation where the virus persists but at a lower level, causing occasional outbreaks. The discussion around vaccination strategies in this context would likely involve considerations like booster shot frequency,
+                              targeting high-risk populations, and adapting vaccines to new variants if necessary.</p>
+                           <div class="read_btn"><a href="/news">Read More</a></div>
+                        </div>
+                     </div>      
+                  </div>
+               </div>
+               <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
+               <i class="fa fa-angle-left"></i>
+               </a>
+               <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
+               <i class="fa fa-angle-right"></i>
+               </a>
+            </div>
+            </div>
+         </div>
+      </div>
+      <!-- news section end -->
+      <!-- update section start -->
+
+      <!-- update section end -->
+      <!-- footer section start -->
+      <div class="footer_section layout_padding">
+         <div class="container">
+            <div class="footer_section_2">
+               <div class="row">
+
+                  <div class="col-lg-4 col-sm-6">
+                     <h2 class="useful_text">About</h2>
+                     <p class="footer_text">Explore our website for up-to-date COVID-19 information, including infection rates and mortality statistics, empowering you to stay informed and make informed decisions</p>
+                  </div>
+                  <div class="col-lg-4 col-sm-6">
+                     <h2 class="useful_text">Contact Us</h2>
+                     <div class="location_text">
+                        <ul>
+                           <li>
+                              <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>
+                              <span class="padding_15">Location</span></a>
+                           </li>
+                           <li>
+                              <a href="#"><i class="fa fa-phone" aria-hidden="true"></i>
+                              <span class="padding_15">Call +91 6282025882</span></a>
+                           </li>
+                           <li>
+                              <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>
+                              <span class="padding_15">covidcare@gmail.com</span></a>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-sm-6">
+                     <h2 class="useful_text">countrys</h2>
+                     <div class="map_image"><img src="{% static 'images/map-bg.png' %}"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- footer section end -->
+      <!-- copyright section start -->
+      <div class="copyright_section">
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-12">
+
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- copyright section end -->
+      <!-- Javascript files-->
+      <script src="{% static 'js/jquery.min.js' %}"></script>
+      <script src="{% static 'js/popper.min.js' %}"></script>
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
+      <script src="{% static 'js/plugin.js' %}"></script>
+      <!-- sidebar -->
+      <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+      <script src="{% static 'js/custom.js' %}"></script>
+      <!-- javascript --> 
+      <script src="{% static 'js/owl.carousel.js' %}"></script>
+      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+      <script>
+         $(document).ready(function(){
+         $(".fancybox").fancybox({
+         openEffect: "none",
+         closeEffect: "none"
+         });
+              
+         $(".zoom").hover(function(){
+              
+         $(this).addClass('transition');
+         }, function(){
+              
+         $(this).removeClass('transition');
+         });
+         });
+      </script> 
+      <script>
+         function openNav() {
+         document.getElementById("myNav").style.width = "100%";
+         }
+         function closeNav() {
+         document.getElementById("myNav").style.width = "0%";
+         }
+      </script>  
+   </body>
+</html>

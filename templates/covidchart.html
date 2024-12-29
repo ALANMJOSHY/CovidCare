@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+{% load static%}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create COVID-19 Table</title>
+<style>
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Prevent scrolling of entire page */
+}
+
+/* Hide the scrollbar for WebKit-based browsers */
+.container::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar */
+}
+
+#video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1000;
+    object-fit: cover; /* Ensure the entire video covers the viewport */
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0); /* Transparent background color */
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1); /* Light shadow */
+    transition: box-shadow 0.3s ease; /* Smooth shadow transition */
+    overflow-y: scroll; /* Allow vertical scrolling within the container */
+    max-height: calc(100% - 40px); /* Adjust max-height to fit within viewport */
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+form label,
+form input[type="text"],
+form input[type="number"],
+form button {
+    color: #ffffff; /* Set the text color to white */
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="number"],
+form button {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ffffff; /* Light border color */
+    border-radius: 4px;
+    background-color: #333333; /* Dark input background color */
+}
+
+form button {
+    background-color: #007bff; /* Button background color */
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3; /* Darker button color on hover */
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ffffff; /* Light border color */
+    text-align: left;
+    padding: 8px;
+    background-color: #333333; /* Darker table background color */
+}
+td {
+    background-color: #333333; /* Darker table header background color */
+    color: #ffffff; /* Table header text color */
+}
+h2 {
+
+    color: #ffffff; /* Table header text color */
+}
+
+th {
+    background-color: #333333; /* Darker table header background color */
+    color: #ffffff; /* Table header text color */
+}
+
+.flag {
+    max-width: 30px;
+    max-height: 20px;
+}
+
+</style>
+</head>
+<body>
+<video autoplay loop muted id="video-background">
+        <source src="{% static 'D:\main project\project\covid\static\covidmap.mp4' %}" type="video/mp4">
+  </video>
+
+<div class="container">
+<h2 style="text-align: center;">COVID-19 pandemic by location</h2>
+
+    <table id="covidTable">
+    <thead>
+        <tr>
+            <th>Flag</th>
+            <th>Location</th>
+            <th>Cases</th>
+            <th>Deaths</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/International_Flag_of_Planet_Earth.svg/1200px-International_Flag_of_Planet_Earth.svg.png" alt="World Icon" class="flag"></td>
+            <td>World[a]</td>
+            <td>774,699,352</td>
+            <td>7,033,430</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/eu.png" alt="European Union Flag" class="flag"></td>
+            <td>European Union</td>
+            <td>185,572,478</td>
+            <td>1,260,086</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/us.png" alt="United States Flag" class="flag"></td>
+            <td>United States</td>
+            <td>103,436,829</td>
+            <td>1,177,223</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/cn.png" alt="China Flag" class="flag"></td>
+            <td>China[c]</td>
+            <td>99,331,724</td>
+            <td>121,976</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/in.png" alt="India Flag" class="flag"></td>
+            <td>India</td>
+            <td>45,028,053</td>
+            <td>533,472</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/fr.png" alt="France Flag" class="flag"></td>
+            <td>France</td>
+            <td>38,997,490</td>
+            <td>167,985</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/de.png" alt="Germany Flag" class="flag"></td>
+            <td>Germany</td>
+            <td>38,437,756</td>
+            <td>174,979</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/br.png" alt="Brazil Flag" class="flag"></td>
+            <td>Brazil</td>
+            <td>37,519,960</td>
+            <td>702,116</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/kr.png" alt="South Korea Flag" class="flag"></td>
+            <td>South Korea</td>
+            <td>34,571,873</td>
+            <td>35,934</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/jp.png" alt="Japan Flag" class="flag"></td>
+            <td>Japan</td>
+            <td>33,803,572</td>
+            <td>74,694</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/it.png" alt="Italy Flag" class="flag"></td>
+            <td>Italy</td>
+            <td>26,711,848</td>
+            <td>196,592</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/gb.png" alt="United Kingdom Flag" class="flag"></td>
+            <td>United Kingdom</td>
+            <td>24,905,351</td>
+            <td>232,112</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ru.png" alt="Russia Flag" class="flag"></td>
+            <td>Russia</td>
+            <td>23,931,163</td>
+            <td>402,097</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/tr.png" alt="Turkey Flag" class="flag"></td>
+            <td>Turkey</td>
+            <td>17,004,677</td>
+            <td>101,419</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/es.png" alt="Spain Flag" class="flag"></td>
+            <td>Spain</td>
+            <td>13,980,340</td>
+            <td>121,852</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/au.png" alt="Australia Flag" class="flag"></td>
+            <td>Australia</td>
+            <td>11,785,451</td>
+            <td>24,782</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/vn.png" alt="Vietnam Flag" class="flag"></td>
+            <td>Vietnam</td>
+            <td>11,624,000</td>
+            <td>43,206</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ar.png" alt="Argentina Flag" class="flag"></td>
+            <td>Argentina</td>
+            <td>10,084,295</td>
+            <td>130,573</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/tw.png" alt="Taiwan Flag" class="flag"></td>
+            <td>Taiwan</td>
+            <td>9,970,937</td>
+            <td>17,672</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/nl.png" alt="Netherlands Flag" class="flag"></td>
+            <td>Netherlands</td>
+            <td>8,635,061</td>
+            <td>22,986</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/mx.png" alt="Mexico Flag" class="flag"></td>
+            <td>Mexico</td>
+            <td>7,702,809</td>
+            <td>334,958</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/jp.png" alt="Japan Flag" class="flag"></td>
+            <td>Japan</td>
+            <td>33,803,572</td>
+            <td>74,694</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/it.png" alt="Italy Flag" class="flag"></td>
+            <td>Italy</td>
+            <td>26,711,848</td>
+            <td>196,592</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/gb.png" alt="United Kingdom Flag" class="flag"></td>
+            <td>United Kingdom</td>
+            <td>24,905,351</td>
+            <td>232,112</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ru.png" alt="Russia Flag" class="flag"></td>
+            <td>Russia</td>
+            <td>23,931,163</td>
+            <td>402,097</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/tr.png" alt="Turkey Flag" class="flag"></td>
+            <td>Turkey</td>
+            <td>17,004,677</td>
+            <td>101,419</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/es.png" alt="Spain Flag" class="flag"></td>
+            <td>Spain</td>
+            <td>13,980,340</td>
+            <td>121,852</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/au.png" alt="Australia Flag" class="flag"></td>
+            <td>Australia</td>
+            <td>11,785,451</td>
+            <td>24,782</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/vn.png" alt="Vietnam Flag" class="flag"></td>
+            <td>Vietnam</td>
+            <td>11,624,000</td>
+            <td>43,206</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ar.png" alt="Argentina Flag" class="flag"></td>
+            <td>Argentina</td>
+            <td>10,084,295</td>
+            <td>130,573</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/tw.png" alt="Taiwan Flag" class="flag"></td>
+            <td>Taiwan</td>
+            <td>9,970,937</td>
+            <td>17,672</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/nl.png" alt="Netherlands Flag" class="flag"></td>
+            <td>Netherlands</td>
+            <td>8,635,061</td>
+            <td>22,986</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/mx.png" alt="Mexico Flag" class="flag"></td>
+            <td>Mexico</td>
+            <td>7,702,809</td>
+            <td>334,958</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ir.png" alt="Iran Flag" class="flag"></td>
+            <td>Iran</td>
+            <td>7,627,186</td>
+            <td>146,811</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/id.png" alt="Indonesia Flag" class="flag"></td>
+            <td>Indonesia</td>
+            <td>6,828,326</td>
+            <td>162,050</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/pl.png" alt="Poland Flag" class="flag"></td>
+            <td>Poland</td>
+            <td>6,658,852</td>
+            <td>120,665</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/co.png" alt="Colombia Flag" class="flag"></td>
+            <td>Colombia</td>
+            <td>6,378,330</td>
+            <td>142,727</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/at.png" alt="Austria Flag" class="flag"></td>
+            <td>Austria</td>
+            <td>6,081,287</td>
+            <td>22,534</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/pt.png" alt="Portugal Flag" class="flag"></td>
+            <td>Portugal</td>
+            <td>5,642,585</td>
+            <td>28,109</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/gr.png" alt="Greece Flag" class="flag"></td>
+            <td>Greece</td>
+            <td>5,621,154</td>
+            <td>38,912</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ua.png" alt="Ukraine Flag" class="flag"></td>
+            <td>Ukraine</td>
+            <td>5,538,535</td>
+            <td>109,918</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/cl.png" alt="Chile Flag" class="flag"></td>
+            <td>Chile</td>
+            <td>5,315,728</td>
+            <td>61,629</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/my.png" alt="Malaysia Flag" class="flag"></td>
+            <td>Malaysia</td>
+            <td>5,274,786</td>
+            <td>37,347</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/be.png" alt="Belgium Flag" class="flag"></td>
+            <td>Belgium</td>
+            <td>4,859,002</td>
+            <td>34,339</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/il.png" alt="Israel Flag" class="flag"></td>
+            <td>Israel</td>
+            <td>4,841,558</td>
+            <td>12,707</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ca.png" alt="Canada Flag" class="flag"></td>
+            <td>Canada</td>
+            <td>4,780,335</td>
+            <td>54,326</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/th.png" alt="Thailand Flag" class="flag"></td>
+            <td>Thailand</td>
+            <td>4,766,751</td>
+            <td>34,564</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/cz.png" alt="Czech Republic Flag" class="flag"></td>
+            <td>Czech Republic</td>
+            <td>4,758,037</td>
+            <td>43,488</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/pe.png" alt="Peru Flag" class="flag"></td>
+            <td>Peru</td>
+            <td>4,525,456</td>
+            <td>220,716</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ch.png" alt="Switzerland Flag" class="flag"></td>
+            <td>Switzerland</td>
+            <td>4,452,132</td>
+            <td>14,185</td>
+        </tr>
+
+    <tbody>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ph.png" alt="Philippines Flag" class="flag"></td>
+            <td>Philippines</td>
+            <td>4,140,383</td>
+            <td>66,864</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/za.png" alt="South Africa Flag" class="flag"></td>
+            <td>South Africa</td>
+            <td>4,072,636</td>
+            <td>102,595</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ro.png" alt="Romania Flag" class="flag"></td>
+            <td>Romania</td>
+            <td>3,523,438</td>
+            <td>68,697</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/dk.png" alt="Denmark Flag" class="flag"></td>
+            <td>Denmark</td>
+            <td>3,434,162</td>
+            <td>9,593</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/sg.png" alt="Singapore Flag" class="flag"></td>
+            <td>Singapore</td>
+            <td>3,001,665</td>
+            <td>2,024</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/hk.png" alt="Hong Kong Flag" class="flag"></td>
+            <td>Hong Kong</td>
+            <td>2,876,106</td>
+            <td>13,466</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/se.png" alt="Sweden Flag" class="flag"></td>
+            <td>Sweden</td>
+            <td>2,750,659</td>
+            <td>27,179</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/rs.png" alt="Serbia Flag" class="flag"></td>
+            <td>Serbia</td>
+            <td>2,583,470</td>
+            <td>18,057</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/nz.png" alt="New Zealand Flag" class="flag"></td>
+            <td>New Zealand</td>
+            <td>2,484,766</td>
+            <td>3,803</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/iq.png" alt="Iraq Flag" class="flag"></td>
+            <td>Iraq</td>
+            <td>2,465,545</td>
+            <td>25,375</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/hu.png" alt="Hungary Flag" class="flag"></td>
+            <td>Hungary</td>
+            <td>2,230,094</td>
+            <td>49,045</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/bd.png" alt="Bangladesh Flag" class="flag"></td>
+            <td>Bangladesh</td>
+            <td>2,047,887</td>
+            <td>29,486</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/sk.png" alt="Slovakia Flag" class="flag"></td>
+            <td>Slovakia</td>
+            <td>1,877,458</td>
+            <td>21,221</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ge.png" alt="Georgia Flag" class="flag"></td>
+            <td>Georgia</td>
+            <td>1,855,289</td>
+            <td>17,132</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/jo.png" alt="Jordan Flag" class="flag"></td>
+            <td>Jordan</td>
+            <td>1,746,997</td>
+            <td>14,122</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ie.png" alt="Republic of Ireland Flag" class="flag"></td>
+            <td>Republic of Ireland</td>
+            <td>1,734,027</td>
+            <td>9,521</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/pk.png" alt="Pakistan Flag" class="flag"></td>
+            <td>Pakistan</td>
+            <td>1,580,631</td>
+            <td>30,656</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/no.png" alt="Norway Flag" class="flag"></td>
+            <td>Norway</td>
+            <td>1,506,641</td>
+            <td>5,732</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/kz.png" alt="Kazakhstan Flag" class="flag"></td>
+            <td>Kazakhstan</td>
+            <td>1,503,687</td>
+            <td>19,072</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/fi.png" alt="Finland Flag" class="flag"></td>
+            <td>Finland</td>
+            <td>1,499,712</td>
+            <td>11,466</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/lt.png" alt="Lithuania Flag" class="flag"></td>
+            <td>Lithuania</td>
+            <td>1,364,151</td>
+            <td>9,797</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/si.png" alt="Slovenia Flag" class="flag"></td>
+            <td>Slovenia</td>
+            <td>1,355,700</td>
+            <td>10,023</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/bg.png" alt="Bulgaria Flag" class="flag"></td>
+            <td>Bulgaria</td>
+            <td>1,328,660</td>
+            <td>38,690</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/hr.png" alt="Croatia Flag" class="flag"></td>
+            <td>Croatia</td>
+            <td>1,309,728</td>
+            <td>18,687</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ma.png" alt="Morocco Flag" class="flag"></td>
+            <td>Morocco</td>
+            <td>1,278,988</td>
+            <td>16,303</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/pr.png" alt="Puerto Rico Flag" class="flag"></td>
+            <td>Puerto Rico</td>
+            <td>1,252,713</td>
+            <td>5,938</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/gt.png" alt="Guatemala Flag" class="flag"></td>
+            <td>Guatemala</td>
+            <td>1,250,288</td>
+            <td>20,200</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/lb.png" alt="Lebanon Flag" class="flag"></td>
+            <td>Lebanon</td>
+            <td>1,239,904</td>
+            <td>10,947</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/cr.png" alt="Costa Rica Flag" class="flag"></td>
+            <td>Costa Rica</td>
+            <td>1,230,653</td>
+            <td>9,368</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/bo.png" alt="Bolivia Flag" class="flag"></td>
+            <td>Bolivia</td>
+            <td>1,198,016</td>
+            <td>22,383</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/tn.png" alt="Tunisia Flag" class="flag"></td>
+            <td>Tunisia</td>
+            <td>1,153,361</td>
+            <td>29,423</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/cu.png" alt="Cuba Flag" class="flag"></td>
+            <td>Cuba</td>
+            <td>1,115,043</td>
+            <td>8,530</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ae.png" alt="United Arab Emirates Flag" class="flag"></td>
+            <td>United Arab Emirates</td>
+            <td>1,067,030</td>
+            <td>2,349</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ec.png" alt="Ecuador Flag" class="flag"></td>
+            <td>Ecuador</td>
+            <td>1,066,945</td>
+            <td>36,032</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/pa.png" alt="Panama Flag" class="flag"></td>
+            <td>Panama</td>
+            <td>1,039,328</td>
+            <td>8,656</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/uy.png" alt="Uruguay Flag" class="flag"></td>
+            <td>Uruguay</td>
+            <td>1,037,893</td>
+            <td>7,625</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/mn.png" alt="Mongolia Flag" class="flag"></td>
+            <td>Mongolia</td>
+            <td>1,011,470</td>
+            <td>2,284</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/np.png" alt="Nepal Flag" class="flag"></td>
+            <td>Nepal</td>
+            <td>1,003,450</td>
+            <td>12,031</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/by.png" alt="Belarus Flag" class="flag"></td>
+            <td>Belarus</td>
+            <td>994,037</td>
+            <td>7,118</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/lv.png" alt="Latvia Flag" class="flag"></td>
+            <td>Latvia</td>
+            <td>977,701</td>
+            <td>7,465</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/sa.png" alt="Saudi Arabia Flag" class="flag"></td>
+            <td>Saudi Arabia</td>
+            <td>841,469</td>
+            <td>9,646</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/az.png" alt="Azerbaijan Flag" class="flag"></td>
+            <td>Azerbaijan</td>
+            <td>834,785</td>
+            <td>10,353</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/py.png" alt="Paraguay Flag" class="flag"></td>
+            <td>Paraguay</td>
+            <td>735,759</td>
+            <td>19,880</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ps.png" alt="Palestine Flag" class="flag"></td>
+            <td>Palestine</td>
+            <td>703,228</td>
+            <td>5,708</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/bh.png" alt="Bahrain Flag" class="flag"></td>
+            <td>Bahrain</td>
+            <td>696,614</td>
+            <td>1,536</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/cy.png" alt="Cyprus Flag" class="flag"></td>
+            <td>Cyprus</td>
+            <td>681,110</td>
+            <td>1,365</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/lk.png" alt="Sri Lanka Flag" class="flag"></td>
+            <td>Sri Lanka</td>
+            <td>672,748</td>
+            <td>16,897</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/kw.png" alt="Kuwait Flag" class="flag"></td>
+            <td>Kuwait</td>
+            <td>667,139</td>
+            <td>2,570</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/do.png" alt="Dominican Republic Flag" class="flag"></td>
+            <td>Dominican Republic</td>
+            <td>661,180</td>
+            <td>4,384</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/mm.png" alt="Myanmar Flag" class="flag"></td>
+            <td>Myanmar</td>
+            <td>641,775</td>
+            <td>19,494</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/md.png" alt="Moldova Flag" class="flag"></td>
+            <td>Moldova</td>
+            <td>634,759</td>
+            <td>12,216</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ee.png" alt="Estonia Flag" class="flag"></td>
+            <td>Estonia</td>
+            <td>609,993</td>
+            <td>2,994</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ve.png" alt="Venezuela Flag" class="flag"></td>
+            <td>Venezuela</td>
+            <td>552,695</td>
+            <td>5,856</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/eg.png" alt="Egypt Flag" class="flag"></td>
+            <td>Egypt</td>
+            <td>516,023</td>
+            <td>24,830</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/qa.png" alt="Qatar Flag" class="flag"></td>
+            <td>Qatar</td>
+            <td>514,524</td>
+            <td>690</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ly.png" alt="Libya Flag" class="flag"></td>
+            <td>Libya</td>
+            <td>507,269</td>
+            <td>6,437</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/et.png" alt="Ethiopia Flag" class="flag"></td>
+            <td>Ethiopia</td>
+            <td>501,157</td>
+            <td>7,574</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/re.png" alt="Réunion Flag" class="flag"></td>
+            <td>Réunion</td>
+            <td>494,595</td>
+            <td>921</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/hn.png" alt="Honduras Flag" class="flag"></td>
+            <td>Honduras</td>
+            <td>472,773</td>
+            <td>11,114</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/am.png" alt="Armenia Flag" class="flag"></td>
+            <td>Armenia</td>
+            <td>451,426</td>
+            <td>8,775</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ba.png" alt="Bosnia and Herzegovina Flag" class="flag"></td>
+            <td>Bosnia and Herzegovina</td>
+            <td>403,593</td>
+            <td>16,386</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/om.png" alt="Oman Flag" class="flag"></td>
+            <td>Oman</td>
+            <td>399,449</td>
+            <td>4,628</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/lu.png" alt="Luxembourg Flag" class="flag"></td>
+            <td>Luxembourg</td>
+            <td>391,093</td>
+            <td>1,000</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/mk.png" alt="North Macedonia Flag" class="flag"></td>
+            <td>North Macedonia</td>
+            <td>350,533</td>
+            <td>9,974</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/zm.png" alt="Zambia Flag" class="flag"></td>
+            <td>Zambia</td>
+            <td>349,304</td>
+            <td>4,069</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ke.png" alt="Kenya Flag" class="flag"></td>
+            <td>Kenya</td>
+            <td>344,094</td>
+            <td>5,689</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/bn.png" alt="Brunei Flag" class="flag"></td>
+            <td>Brunei</td>
+            <td>343,199</td>
+            <td>178</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/al.png" alt="Albania Flag" class="flag"></td>
+            <td>Albania</td>
+            <td>334,863</td>
+            <td>3,605</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/bw.png" alt="Botswana Flag" class="flag"></td>
+            <td>Botswana</td>
+            <td>330,417</td>
+            <td>2,800</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/mu.png" alt="Mauritius Flag" class="flag"></td>
+            <td>Mauritius</td>
+            <td>327,256</td>
+            <td>1,070</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/xk.png" alt="Kosovo Flag" class="flag"></td>
+            <td>Kosovo</td>
+            <td>274,279</td>
+            <td>3,212</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/dz.png" alt="Algeria Flag" class="flag"></td>
+            <td>Algeria</td>
+            <td>272,010</td>
+            <td>6,881</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ng.png" alt="Nigeria Flag" class="flag"></td>
+            <td>Nigeria</td>
+            <td>267,188</td>
+            <td>3,155</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/zw.png" alt="Zimbabwe Flag" class="flag"></td>
+            <td>Zimbabwe</td>
+            <td>266,350</td>
+            <td>5,737</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/me.png" alt="Montenegro Flag" class="flag"></td>
+            <td>Montenegro</td>
+            <td>251,280</td>
+            <td>2,654</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/mz.png" alt="Mozambique Flag" class="flag"></td>
+            <td>Mozambique</td>
+            <td>233,731</td>
+            <td>2,250</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/af.png" alt="Afghanistan Flag" class="flag"></td>
+            <td>Afghanistan</td>
+            <td>231,990</td>
+            <td>7,982</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/mq.png" alt="Martinique Flag" class="flag"></td>
+            <td>Martinique</td>
+            <td>230,354</td>
+            <td>1,104</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/la.png" alt="Laos Flag" class="flag"></td>
+            <td>Laos</td>
+            <td>218,931</td>
+            <td>671</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/is.png" alt="Iceland Flag" class="flag"></td>
+            <td>Iceland</td>
+            <td>209,895</td>
+            <td>186</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/gp.png" alt="Guadeloupe Flag" class="flag"></td>
+            <td>Guadeloupe</td>
+            <td>203,235</td>
+            <td>1,021</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/sv.png" alt="El Salvador Flag" class="flag"></td>
+            <td>El Salvador</td>
+            <td>201,809</td>
+            <td>4,230</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/tt.png" alt="Trinidad and Tobago Flag" class="flag"></td>
+            <td>Trinidad and Tobago</td>
+            <td>191,496</td>
+            <td>4,390</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/mv.png" alt="Maldives Flag" class="flag"></td>
+            <td>Maldives</td>
+            <td>186,694</td>
+            <td>316</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/uz.png" alt="Uzbekistan Flag" class="flag"></td>
+            <td>Uzbekistan</td>
+            <td>175,081</td>
+            <td>1,016</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/na.png" alt="Namibia Flag" class="flag"></td>
+            <td>Namibia</td>
+            <td>172,323</td>
+            <td>4,103</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ug.png" alt="Uganda Flag" class="flag"></td>
+            <td>Uganda</td>
+            <td>172,149</td>
+            <td>3,632</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/gh.png" alt="Ghana Flag" class="flag"></td>
+            <td>Ghana</td>
+            <td>171,834</td>
+            <td>1,462</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/jm.png" alt="Jamaica Flag" class="flag"></td>
+            <td>Jamaica</td>
+            <td>156,768</td>
+            <td>3,593</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/kh.png" alt="Cambodia Flag" class="flag"></td>
+            <td>Cambodia</td>
+            <td>139,091</td>
+            <td>3,056</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/rw.png" alt="Rwanda Flag" class="flag"></td>
+            <td>Rwanda</td>
+            <td>133,208</td>
+            <td>1,468</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/cm.png" alt="Cameroon Flag" class="flag"></td>
+            <td>Cameroon</td>
+            <td>125,137</td>
+            <td>1,974</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/mt.png" alt="Malta Flag" class="flag"></td>
+            <td>Malta</td>
+            <td>121,380</td>
+            <td>902</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/bb.png" alt="Barbados Flag" class="flag"></td>
+            <td>Barbados</td>
+            <td>108,047</td>
+            <td>593</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ao.png" alt="Angola Flag" class="flag"></td>
+            <td>Angola</td>
+            <td>107,325</td>
+            <td>1,937</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/cd.png" alt="Democratic Republic of the Congo Flag" class="flag"></td>
+            <td>Democratic Republic of the Congo</td>
+            <td>99,338</td>
+            <td>1,468</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/gf.png" alt="French Guiana Flag" class="flag"></td>
+            <td>French Guiana</td>
+            <td>98,041</td>
+            <td>413</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/mw.png" alt="Malawi Flag" class="flag"></td>
+            <td>Malawi</td>
+            <td>89,168</td>
+            <td>2,686</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/sn.png" alt="Senegal Flag" class="flag"></td>
+            <td>Senegal</td>
+            <td>89,050</td>
+            <td>1,971</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/kg.png" alt="Kyrgyzstan Flag" class="flag"></td>
+            <td>Kyrgyzstan</td>
+            <td>88,953</td>
+            <td>1,024</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ci.png" alt="Ivory Coast Flag" class="flag"></td>
+            <td>Ivory Coast</td>
+            <td>88,384</td>
+            <td>835</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/sr.png" alt="Suriname Flag" class="flag"></td>
+            <td>Suriname</td>
+            <td>82,496</td>
+            <td>1,405</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/nc.png" alt="New Caledonia Flag" class="flag"></td>
+            <td>New Caledonia</td>
+            <td>80,064</td>
+            <td>314</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/pf.png" alt="French Polynesia Flag" class="flag"></td>
+            <td>French Polynesia</td>
+            <td>79,254</td>
+            <td>650</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/sz.png" alt="Eswatini Flag" class="flag"></td>
+            <td>Eswatini</td>
+            <td>75,191</td>
+            <td>1,427</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/gy.png" alt="Guyana Flag" class="flag"></td>
+            <td>Guyana</td>
+            <td>73,805</td>
+            <td>1,300</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/bz.png" alt="Belize Flag" class="flag"></td>
+            <td>Belize</td>
+            <td>70,802</td>
+            <td>688</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/fj.png" alt="Fiji Flag" class="flag"></td>
+            <td>Fiji</td>
+            <td>69,047</td>
+            <td>885</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/mg.png" alt="Madagascar Flag" class="flag"></td>
+            <td>Madagascar</td>
+            <td>68,486</td>
+            <td>1,426</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/je.png" alt="Jersey Flag" class="flag"></td>
+            <td>Jersey</td>
+            <td>66,391</td>
+            <td>161</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/cv.png" alt="Cape Verde Flag" class="flag"></td>
+            <td>Cape Verde</td>
+            <td>64,474</td>
+            <td>417</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/sd.png" alt="Sudan Flag" class="flag"></td>
+            <td>Sudan</td>
+            <td>63,993</td>
+            <td>5,046</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/mr.png" alt="Mauritania Flag" class="flag"></td>
+            <td>Mauritania</td>
+            <td>63,845</td>
+            <td>997</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/bt.png" alt="Bhutan Flag" class="flag"></td>
+            <td>Bhutan</td>
+            <td>62,697</td>
+            <td>21</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/sy.png" alt="Syria Flag" class="flag"></td>
+            <td>Syria</td>
+            <td>57,423</td>
+            <td>3,163</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/bi.png" alt="Burundi Flag" class="flag"></td>
+            <td>Burundi</td>
+            <td>54,565</td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/gu.png" alt="Guam Flag" class="flag"></td>
+            <td>Guam</td>
+            <td>52,287</td>
+            <td>419</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/sc.png" alt="Seychelles Flag" class="flag"></td>
+            <td>Seychelles</td>
+            <td>51,220</td>
+            <td>172</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ga.png" alt="Gabon Flag" class="flag"></td>
+            <td>Gabon</td>
+            <td>49,051</td>
+            <td>307</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ad.png" alt="Andorra Flag" class="flag"></td>
+            <td>Andorra</td>
+            <td>48,015</td>
+            <td>159</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/pg.png" alt="Papua New Guinea Flag" class="flag"></td>
+            <td>Papua New Guinea</td>
+            <td>46,864</td>
+            <td>670</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/cw.png" alt="Curaçao Flag" class="flag"></td>
+            <td>Curaçao</td>
+            <td>45,883</td>
+            <td>305</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/aw.png" alt="Aruba Flag" class="flag"></td>
+            <td>Aruba</td>
+            <td>44,224</td>
+            <td>292</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/tz.png" alt="Tanzania Flag" class="flag"></td>
+            <td>Tanzania</td>
+            <td>43,223</td>
+            <td>846</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/yt.png" alt="Mayotte Flag" class="flag"></td>
+            <td>Mayotte</td>
+            <td>42,027</td>
+            <td>187</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/tg.png" alt="Togo Flag" class="flag"></td>
+            <td>Togo</td>
+            <td>39,527</td>
+            <td>290</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/gn.png" alt="Guinea Flag" class="flag"></td>
+            <td>Guinea</td>
+            <td>38,572</td>
+            <td>468</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/bs.png" alt="The Bahamas Flag" class="flag"></td>
+            <td>The Bahamas</td>
+            <td>38,084</td>
+            <td>844</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/im.png" alt="Isle of Man Flag" class="flag"></td>
+            <td>Isle of Man</td>
+            <td>38,008</td>
+            <td>116</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ls.png" alt="Lesotho Flag" class="flag"></td>
+            <td>Lesotho</td>
+            <td>36,138</td>
+            <td>709</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/gg.png" alt="Guernsey Flag" class="flag"></td>
+            <td>Guernsey</td>
+            <td>35,326</td>
+            <td>67</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/fo.png" alt="Faroe Islands Flag" class="flag"></td>
+            <td>Faroe Islands</td>
+            <td>34,658</td>
+            <td>28</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ht.png" alt="Haiti Flag" class="flag"></td>
+            <td>Haiti</td>
+            <td>34,297</td>
+            <td>860</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ml.png" alt="Mali Flag" class="flag"></td>
+            <td>Mali</td>
+            <td>33,164</td>
+            <td>743</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ky.png" alt="Cayman Islands Flag" class="flag"></td>
+            <td>Cayman Islands</td>
+            <td>31,472</td>
+            <td>37</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/lc.png" alt="Saint Lucia Flag" class="flag"></td>
+            <td>Saint Lucia</td>
+            <td>30,069</td>
+            <td>409</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/bj.png" alt="Benin Flag" class="flag"></td>
+            <td>Benin</td>
+            <td>28,036</td>
+            <td>163</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/so.png" alt="Somalia Flag" class="flag"></td>
+            <td>Somalia</td>
+            <td>27,334</td>
+            <td>1,361</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/fm.png" alt="Federated States of Micronesia Flag" class="flag"></td>
+            <td>Federated States of Micronesia</td>
+            <td>26,547</td>
+            <td>65</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/sb.png" alt="Solomon Islands Flag" class="flag"></td>
+            <td>Solomon Islands</td>
+            <td>25,954</td>
+            <td>199</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/vi.png" alt="United States Virgin Islands Flag" class="flag"></td>
+            <td>United States Virgin Islands</td>
+            <td>25,389</td>
+            <td>132</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/sm.png" alt="San Marino Flag" class="flag"></td>
+            <td>San Marino</td>
+            <td>25,292</td>
+            <td>126</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/cg.png" alt="Republic of the Congo Flag" class="flag"></td>
+            <td>Republic of the Congo</td>
+            <td>25,213</td>
+            <td>389</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/tl.png" alt="East Timor Flag" class="flag"></td>
+            <td>East Timor</td>
+            <td>23,460</td>
+            <td>138</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/bf.png" alt="Burkina Faso Flag" class="flag"></td>
+            <td>Burkina Faso</td>
+            <td>22,109</td>
+            <td>400</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/li.png" alt="Liechtenstein Flag" class="flag"></td>
+            <td>Liechtenstein</td>
+            <td>21,574</td>
+            <td>89</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/gi.png" alt="Gibraltar Flag" class="flag"></td>
+            <td>Gibraltar</td>
+            <td>20,550</td>
+            <td>113</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/gd.png" alt="Grenada Flag" class="flag"></td>
+            <td>Grenada</td>
+            <td>19,693</td>
+            <td>238</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/bm.png" alt="Bermuda Flag" class="flag"></td>
+            <td>Bermuda</td>
+            <td>18,860</td>
+            <td>165</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ss.png" alt="South Sudan Flag" class="flag"></td>
+            <td>South Sudan</td>
+            <td>18,819</td>
+            <td>147</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/tj.png" alt="Tajikistan Flag" class="flag"></td>
+            <td>Tajikistan</td>
+            <td>17,786</td>
+            <td>125</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/mc.png" alt="Monaco Flag" class="flag"></td>
+            <td>Monaco</td>
+            <td>17,181</td>
+            <td>67</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/gq.png" alt="Equatorial Guinea Flag" class="flag"></td>
+            <td>Equatorial Guinea</td>
+            <td>17,130</td>
+            <td>183</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ws.png" alt="Samoa Flag" class="flag"></td>
+            <td>Samoa</td>
+            <td>16,962</td>
+            <td>31</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/to.png" alt="Tonga Flag" class="flag"></td>
+            <td>Tonga</td>
+            <td>16,950</td>
+            <td>12</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/mh.png" alt="Marshall Islands Flag" class="flag"></td>
+            <td>Marshall Islands</td>
+            <td>16,138</td>
+            <td>17</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/dm.png" alt="Dominica Flag" class="flag"></td>
+            <td>Dominica</td>
+            <td>15,760</td>
+            <td>74</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ni.png" alt="Nicaragua Flag" class="flag"></td>
+            <td>Nicaragua</td>
+            <td>15,729</td>
+            <td>245</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/dj.png" alt="Djibouti Flag" class="flag"></td>
+            <td>Djibouti</td>
+            <td>15,690</td>
+            <td>189</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/cf.png" alt="Central African Republic Flag" class="flag"></td>
+            <td>Central African Republic</td>
+            <td>15,440</td>
+            <td>113</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/mp.png" alt="Northern Mariana Islands Flag" class="flag"></td>
+            <td>Northern Mariana Islands</td>
+            <td>14,341</td>
+            <td>41</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/gm.png" alt="The Gambia Flag" class="flag"></td>
+            <td>The Gambia</td>
+            <td>12,626</td>
+            <td>372</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/mf.png" alt="Collectivity of Saint Martin Flag" class="flag"></td>
+            <td>Collectivity of Saint Martin</td>
+            <td>12,324</td>
+            <td>46</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/vu.png" alt="Vanuatu Flag" class="flag"></td>
+            <td>Vanuatu</td>
+            <td>12,019</td>
+            <td>14</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/gl.png" alt="Greenland Flag" class="flag"></td>
+            <td>Greenland</td>
+            <td>11,971</td>
+            <td>21</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ye.png" alt="Yemen Flag" class="flag"></td>
+            <td>Yemen</td>
+            <td>11,945</td>
+            <td>2,159</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/bq.png" alt="Caribbean Netherlands Flag" class="flag"></td>
+            <td>Caribbean Netherlands</td>
+            <td>11,922</td>
+            <td>41</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/sx.png" alt="Sint Maarten Flag" class="flag"></td>
+            <td>Sint Maarten</td>
+            <td>11,051</td>
+            <td>92</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/er.png" alt="Eritrea Flag" class="flag"></td>
+            <td>Eritrea</td>
+            <td>10,189</td>
+            <td>103</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/vc.png" alt="Saint Vincent and the Grenadines Flag" class="flag"></td>
+            <td>Saint Vincent and the Grenadines</td>
+            <td>9,674</td>
+            <td>124</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/gw.png" alt="Guinea-Bissau Flag" class="flag"></td>
+            <td>Guinea-Bissau</td>
+            <td>9,614</td>
+            <td>177</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ne.png" alt="Niger Flag" class="flag"></td>
+            <td>Niger</td>
+            <td>9,515</td>
+            <td>315</td>
+        </tr>
+
+    <tbody>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/km.png" alt="Comoros Flag" class="flag"></td>
+            <td>Comoros</td>
+            <td>9,109</td>
+            <td>160</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ag.png" alt="Antigua and Barbuda Flag" class="flag"></td>
+            <td>Antigua and Barbuda</td>
+            <td>9,106</td>
+            <td>146</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/as.png" alt="American Samoa Flag" class="flag"></td>
+            <td>American Samoa</td>
+            <td>8,359</td>
+            <td>34</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/lr.png" alt="Liberia Flag" class="flag"></td>
+            <td>Liberia</td>
+            <td>7,930</td>
+            <td>294</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/sl.png" alt="Sierra Leone Flag" class="flag"></td>
+            <td>Sierra Leone</td>
+            <td>7,779</td>
+            <td>125</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/td.png" alt="Chad Flag" class="flag"></td>
+            <td>Chad</td>
+            <td>7,698</td>
+            <td>194</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/vg.png" alt="British Virgin Islands Flag" class="flag"></td>
+            <td>British Virgin Islands</td>
+            <td>7,392</td>
+            <td>64</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ck.png" alt="Cook Islands Flag" class="flag"></td>
+            <td>Cook Islands</td>
+            <td>7,203</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/tc.png" alt="Turks and Caicos Islands Flag" class="flag"></td>
+            <td>Turks and Caicos Islands</td>
+            <td>6,747</td>
+            <td>40</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/st.png" alt="Sao Tome and Principe Flag" class="flag"></td>
+            <td>Sao Tome and Principe</td>
+            <td>6,736</td>
+            <td>80</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/kn.png" alt="Saint Kitts and Nevis Flag" class="flag"></td>
+            <td>Saint Kitts and Nevis</td>
+            <td>6,607</td>
+            <td>46</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/pw.png" alt="Palau Flag" class="flag"></td>
+            <td>Palau</td>
+            <td>6,265</td>
+            <td>9</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/bl.png" alt="Saint Barthélemy Flag" class="flag"></td>
+            <td>Saint Barthélemy</td>
+            <td>5,507</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/nr.png" alt="Nauru Flag" class="flag"></td>
+            <td>Nauru</td>
+            <td>5,393</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ki.png" alt="Kiribati Flag" class="flag"></td>
+            <td>Kiribati</td>
+            <td>5,085</td>
+            <td>24</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ai.png" alt="Anguilla Flag" class="flag"></td>
+            <td>Anguilla</td>
+            <td>3,904</td>
+            <td>12</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/wf.png" alt="Wallis and Futuna Flag" class="flag"></td>
+            <td>Wallis and Futuna</td>
+            <td>3,550</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/mo.png" alt="Macau Flag" class="flag"></td>
+            <td>Macau</td>
+            <td>3,514</td>
+            <td>121</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/pm.png" alt="Saint Pierre and Miquelon Flag" class="flag"></td>
+            <td>Saint Pierre and Miquelon</td>
+            <td>3,426</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/tv.png" alt="Tuvalu Flag" class="flag"></td>
+            <td>Tuvalu</td>
+            <td>2,943</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/sh.png" alt="Saint Helena, Ascension and Tristan da Cunha Flag" class="flag"></td>
+            <td>Saint Helena, Ascension and Tristan da Cunha</td>
+            <td>2,166</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/fk.png" alt="Falkland Islands Flag" class="flag"></td>
+            <td>Falkland Islands</td>
+            <td>1,923</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/ms.png" alt="Montserrat Flag" class="flag"></td>
+            <td>Montserrat</td>
+            <td>1,403</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/nu.png" alt="Niue Flag" class="flag"></td>
+            <td>Niue</td>
+            <td>993</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/tk.png" alt="Tokelau Flag" class="flag"></td>
+            <td>Tokelau</td>
+            <td>80</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/va.png" alt="Vatican City Flag" class="flag"></td>
+            <td>Vatican City</td>
+            <td>26</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/pn.png" alt="Pitcairn Islands Flag" class="flag"></td>
+            <td>Pitcairn Islands</td>
+            <td>4</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/kp.png" alt="North Korea Flag" class="flag"></td>
+            <td>North Korea</td>
+            <td>1</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td><img src="https://flagcdn.com/w160/tm.png" alt="Turkmenistan Flag" class="flag"></td>
+            <td>Turkmenistan</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+<script>
+function addRow() {
+    var form = document.getElementById("covidForm");
+    var table = document.getElementById("covidTable").getElementsByTagName('tbody')[0];
+    var newRow = table.insertRow(table.rows.length);
+
+    var flagCell = newRow.insertCell(0);
+    var location = newRow.insertCell(1);
+    var cases = newRow.insertCell(2);
+    var deaths = newRow.insertCell(3);
+
+    var flagUrl = "https://flagcdn.com/w160/" + form.elements["location"].value.toLowerCase() + ".png";
+    var flagImage = document.createElement("img");
+    flagImage.src = flagUrl;
+    flagImage.alt = form.elements["location"].value + " Flag";
+    flagImage.className = "flag";
+    flagCell.appendChild(flagImage);
+
+    location.innerHTML = form.elements["location"].value;
+    cases.innerHTML = form.elements["cases"].value;
+    deaths.innerHTML = form.elements["deaths"].value;
+
+    form.reset();
+}
+</script>
+
+</body>
+</html>

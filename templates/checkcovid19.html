@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Covid 19</title>
+    <style>
+   body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Prevent scrolling of entire page */
+}
+
+#video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1000;
+    object-fit: cover; /* Ensure the entire video covers the viewport */
+}
+
+
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0); /* Transparent background color */
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1); /* Light shadow */
+    transition: box-shadow 0.3s ease; /* Smooth shadow transition */
+    overflow-y: auto; /* Allow vertical scrolling within the container */
+    max-height: calc(100% - 40px); /* Adjust max-height to fit within viewport */
+}
+
+.container:hover {
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2); /* Larger shadow on hover */
+}
+
+h1 {
+    color: #ffffff; /* Header text color */
+    text-align: center;
+}
+
+label {
+    font-weight: bold;
+}
+
+input, select {
+    width: calc(100% - 20px); /* Adjust input width */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #555555; /* Darker border color */
+    border-radius: 5px;
+    background-color: #404247; /* Darker input background color */
+    color: #ffffff; /* Input text color */
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+button {
+    width: auto; /* Adjust width of the buttons */
+    padding: 8px 16px; /* Adjust button padding */
+    margin-right: 10px; /* Adjust button margin */
+}
+
+
+/* Hide scrollbar */
+.container::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar */
+}
+
+
+
+        input:focus, select:focus {
+            border-color: #007bff; /* Focus border color */
+            background-color: #505358; /* Focus background color */
+            color: #ffffff; /* Focus text color */
+        }
+
+        button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth background color transition */
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Darker background color on hover */
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body>
+<video autoplay loop muted id="video-background">
+        <source src="{% static 'D:\main project\project\covid\static\doctor1.mp4' %}" type="video/mp4">
+  </video>
+    <div class="container">
+        <h1 style="color: #000000;">COVID-19 Predictor</h1>
+
+        <form id="personForm" action="/check_covid/" method="post">{% csrf_token %}
+            <!-- Breathing Problem -->
+            <label for="breathingProblem">Breathing Problem:</label>
+<select id="breathingProblem" name="breathingProblem" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Fever -->
+            <label for="fever">Fever:</label>
+            <select id="fever" name="fever" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Dry Cough -->
+            <label for="dryCough">Dry Cough:</label>
+            <select id="dryCough" name="dryCough" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Sore Throat -->
+            <label for="soreThroat">Sore Throat:</label>
+            <select id="soreThroat" name="soreThroat" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Running Nose -->
+            <label for="runningNose">Running Nose:</label>
+            <select id="runningNose" name="runningNose" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Asthma -->
+            <label for="asthma">Asthma:</label>
+            <select id="asthma" name="asthma" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Chronic Lung Disease -->
+            <label for="chronicLungDisease">Chronic Lung Disease:</label>
+            <select id="chronicLungDisease" name="chronicLungDisease" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Headache -->
+            <label for="headache">Headache:</label>
+            <select id="headache" name="headache" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Heart Disease -->
+            <label for="heartDisease">Heart Disease:</label>
+            <select id="heartDisease" name="heartDisease" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Diabetes -->
+            <label for="diabetes">Diabetes:</label>
+            <select id="diabetes" name="diabetes" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Hyper Tension -->
+            <label for="hyperTension">Hyper Tension:</label>
+            <select id="hyperTension" name="hyperTension" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Fatigue -->
+            <label for="fatigue">Fatigue:</label>
+            <select id="fatigue" name="fatigue" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Gastrointestinal -->
+            <label for="gastrointestinal">Gastrointestinal:</label>
+            <select id="gastrointestinal" name="gastrointestinal" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Abroad Travel -->
+            <label for="abroadTravel">Abroad Travel:</label>
+            <select id="abroadTravel" name="abroadTravel" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Contact with COVID Patient -->
+            <label for="contactWithCovidPatient">Contact with COVID Patient:</label>
+            <select id="contactWithCovidPatient" name="contactWithCovidPatient" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Attended Large Gathering -->
+            <label for="attendedLargeGathering">Attended Large Gathering:</label>
+            <select id="attendedLargeGathering" name="attendedLargeGathering" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Visited Public Exposed Places -->
+            <label for="visitedPublicExposedPlaces">Visited Public Exposed Places:</label>
+            <select id="visitedPublicExposedPlaces" name="visitedPublicExposedPlaces" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Family Working in Public Exposed Places -->
+            <label for="familyWorkingInPublicExposedPlaces">Family Working in Public Exposed Places:</label>
+            <select id="familyWorkingInPublicExposedPlaces" name="familyWorkingInPublicExposedPlaces" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Wearing Masks -->
+            <label for="wearingMasks">Wearing Masks:</label>
+            <select id="wearingMasks" name="wearingMasks" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <!-- Sanitization from Market -->
+            <label for="sanitizationFromMarket">Sanitization from Market:</label>
+            <select id="sanitizationFromMarket" name="sanitizationFromMarket" required>
+                <option></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+
+  <!-- Submit Button -->
+<button type="submit" style="background-color: #333333; color: #ffffff;">Predict</button>
+<!-- Reset Button -->
+<button type="reset" style="background-color: #333333; color: #ffffff;">Reset</button>
+<!-- Back Button -->
+<button type="button" onclick="history.back()" style="background-color: #333333; color: #ffffff;">Back</button>
+
+
+        </form>
+    </div>
+
+    <script>
+        // JavaScript code remains the same
+    </script>
+</body>
+</html>
